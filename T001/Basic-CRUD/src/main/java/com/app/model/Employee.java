@@ -5,6 +5,7 @@ import lombok.*;
 import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 
 @Entity
 @Table(name = "Emp_Tbl")
@@ -27,8 +28,8 @@ public class Employee {
     @NotBlank(message = "City Can't be Empty")
     @Column(name = "City", nullable = false, length = 20)
     private String city;
-    @NotBlank(message = "Salary Can't Be Empty")
     @Column(name = "Salary", nullable = false, length = 20)
+    @NotNull(message = "Salary cannot be empty")
     private Double salary;
     @Email(message = "Email should be valid")
     @NotBlank(message = "Email can't be Empty")
