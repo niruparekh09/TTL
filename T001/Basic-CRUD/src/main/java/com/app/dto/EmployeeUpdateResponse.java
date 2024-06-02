@@ -7,6 +7,6 @@ import lombok.*;
 @ToString
 @AllArgsConstructor
 @NoArgsConstructor
-public class EmployeeUpdate {
+public class EmployeeUpdateResponse {
     private String message;
 }

@@ -7,7 +7,7 @@ import lombok.*;
 @ToString
 @AllArgsConstructor
 @NoArgsConstructor
-public class EmployeeDelete {
+public class EmployeeDeleteResponse {
     private Long id;
     private String message;
 }
