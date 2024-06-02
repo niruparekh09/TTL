@@ -40,5 +40,8 @@ public class Employee {
     @NotBlank(message = "Enter Department")
     @Column(name = "Dept", nullable = false, length = 20)
     private String dept;
+    @NotBlank(message = "Enter the Role")
+    @Column(name = "Role", nullable = false, length = 20)
+    private Role role;
 
 }
