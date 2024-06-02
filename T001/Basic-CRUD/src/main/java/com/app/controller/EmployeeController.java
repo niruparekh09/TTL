@@ -1,4 +1,4 @@
-package com.app.Controllers;
+package com.app.controllers;
 
 public class EmployeeController {
 }
