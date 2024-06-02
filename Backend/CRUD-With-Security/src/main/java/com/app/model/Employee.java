@@ -8,7 +8,7 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
 @Entity
-@Table(name = "Emp_Tbl")
+@Table(name = "Employee_Tbl")
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
@@ -40,8 +40,8 @@ public class Employee {
     @NotBlank(message = "Enter Department")
     @Column(name = "Dept", nullable = false, length = 20)
     private String dept;
-    @NotBlank(message = "Enter the Role")
     @Column(name = "Role", nullable = false, length = 20)
+    @Enumerated(EnumType.STRING)
     private Role role;
 
 }

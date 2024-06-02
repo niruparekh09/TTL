@@ -6,6 +6,7 @@ import com.app.dto.EmployeeInsert;
 import com.app.dto.EmployeeResponse;
 import com.app.dto.EmployeeUpdateResponse;
 import com.app.model.Employee;
+import com.app.model.Role;
 import com.app.repository.EmployeeRepository;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -43,7 +44,10 @@ public class EmployeeServiceImpl implements EmployeeService {
 
     @Override
     public EmployeeResponse addEmployee(EmployeeInsert emp) {
-        Employee employee = employeeRepository.save(modelMapper.map(emp, Employee.class));
+        Employee employee = modelMapper.map(emp, Employee.class);
+        // Manually set the Role
+        employee.setRole(Role.valueOf(emp.getRole().toUpperCase()));
+        employee = employeeRepository.save(employee);
         return modelMapper.map(employee, EmployeeResponse.class);
     }
 

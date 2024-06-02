@@ -1,6 +1,5 @@
 package com.app.dto;
 
-import com.app.model.Role;
 import lombok.*;
 
 @Getter
@@ -16,5 +15,5 @@ public class EmployeeInsert {
     private String email;
     private String password;
     private String dept;
-    private Role role;
+    private String role;
 }
