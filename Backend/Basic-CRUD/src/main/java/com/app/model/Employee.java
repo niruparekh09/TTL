@@ -40,5 +40,8 @@ public class Employee {
     @NotBlank(message = "Enter Department")
     @Column(name = "Dept", nullable = false, length = 20)
     private String dept;
+    @Column(name = "Role", nullable = false, length = 20)
+    @Enumerated(EnumType.STRING)
+    private Role role;
 
 }
