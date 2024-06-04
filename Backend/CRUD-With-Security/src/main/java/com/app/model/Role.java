@@ -1,5 +1,5 @@
 package com.app.model;
 
 public enum Role {
-    USER, DEV, ADMIN
+    ROLE_USER, ROLE_DEV, ROLE_ADMIN
 }
