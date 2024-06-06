@@ -7,30 +7,29 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Arrays;
 import java.util.Collection;
-import java.util.List;
 
-public class CustomEmployeeDetails implements UserDetails {
+public class CustomUserDetails implements UserDetails {
+    private Employee authUserDetails;
 
-    private Employee authEmpDetails;
-
-    public CustomEmployeeDetails(Employee authEmpDetails) {
+    public CustomUserDetails(Employee authenticatedUser) {
         super();
-        this.authEmpDetails = authEmpDetails;
+        this.authUserDetails = authenticatedUser;
     }
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return List.of(new SimpleGrantedAuthority(authEmpDetails.getRole().name()));
+        // Here We Are mapping the Role to That Particular User to Grant Authority
+        return Arrays.asList(new SimpleGrantedAuthority(authUserDetails.getUserRole().name()));
     }
 
     @Override
     public String getPassword() {
-        return authEmpDetails.getPassword();
+        return authUserDetails.getPassword();
     }
 
     @Override
     public String getUsername() {
-        return authEmpDetails.getFirstName() + " " + authEmpDetails.getLastName();
+        return authUserDetails.getEmail();
     }
 
     @Override
@@ -52,5 +51,4 @@ public class CustomEmployeeDetails implements UserDetails {
     public boolean isEnabled() {
         return true;
     }
-
 }

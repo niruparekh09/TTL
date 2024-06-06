@@ -20,7 +20,7 @@ public class EmployeeController {
     @Autowired
     private EmployeeService employeeService;
 
-    @GetMapping
+    @GetMapping("/")
     public ResponseEntity<List<EmployeeResponse>> getEmployeeList() {
         List<EmployeeResponse> list = employeeService.getEmployeeList();
         return ResponseEntity.ok(list);
@@ -32,14 +32,14 @@ public class EmployeeController {
         return ResponseEntity.ok(response);
     }
 
-    @PreAuthorize("hasRole('ROLE_DEV')")
+    //@PreAuthorize("hasRole('ROLE_DEV')")
     @PostMapping
     public ResponseEntity<EmployeeResponse> addEmployee(@RequestBody @Valid EmployeeInsert emp) {
         EmployeeResponse response = employeeService.addEmployee(emp);
-        return ResponseEntity.status(201).body(response); // Use 201 Created for new resource creation
+        return ResponseEntity.status(201).body(response); // Used 201 Created for new resource creation
     }
 
-    @PreAuthorize("hasRole('ROLE_DEV')")
+  //  @PreAuthorize("hasRole('ROLE_DEV')")
     @PutMapping("/{id}")
     public ResponseEntity<EmployeeUpdateResponse> updateEmployee(@PathVariable Long id, @RequestBody @Valid EmployeeInsert emp) {
         EmployeeUpdateResponse response = employeeService.updateEmployee(id, emp);

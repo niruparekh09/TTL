@@ -42,6 +42,6 @@ public class Employee {
     private String dept;
     @Column(name = "Role", nullable = false, length = 20)
     @Enumerated(EnumType.STRING)
-    private Role role;
+    private UserRole userRole;
 
 }

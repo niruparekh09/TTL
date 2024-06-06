@@ -33,7 +33,7 @@ const GetData = () => {
       <ul>
         {data.map((post) => (
           <li key={post.id}>
-            {post.title}{" "}
+            {post.title}
             <button onClick={() => deletePost(post.id)}>Delete</button>
           </li>
         ))}

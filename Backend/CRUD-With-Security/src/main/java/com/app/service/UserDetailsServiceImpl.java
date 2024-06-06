@@ -1,6 +1,5 @@
 package com.app.service;
 
-import com.app.custom_exception.ResourceNotFoundException;
 import com.app.model.Employee;
 import com.app.repository.EmployeeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,9 +19,8 @@ public class UserDetailsServiceImpl implements UserDetailsService {
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
         Employee authenticatedEmployee = empRepo.findByEmail(email)
-                .orElseThrow(
-                        () -> new UsernameNotFoundException("Invalid Email !!!")
-                ); //Throw Username not found Exception
-        return new CustomEmployeeDetails(authenticatedEmployee);
+                .orElseThrow(() -> new UsernameNotFoundException("Invalid Email !!!"));
+        System.out.println(authenticatedEmployee.getEmail());
+        return new CustomUserDetails(authenticatedEmployee);
     }
 }
