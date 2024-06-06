@@ -7,6 +7,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.HashSet;
 
 public class CustomUserDetails implements UserDetails {
     private Employee authUserDetails;
@@ -18,8 +19,10 @@ public class CustomUserDetails implements UserDetails {
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        // Here We Are mapping the Role to That Particular User to Grant Authority
-        return Arrays.asList(new SimpleGrantedAuthority(authUserDetails.getUserRole().name()));
+        HashSet<SimpleGrantedAuthority> set = new HashSet<>();
+        set.add(new SimpleGrantedAuthority(authUserDetails.getUserRole().name()));
+        System.out.println(set.toString());
+        return set;
     }
 
     @Override

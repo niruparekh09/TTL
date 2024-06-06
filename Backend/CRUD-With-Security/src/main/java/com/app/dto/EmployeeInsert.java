@@ -2,6 +2,8 @@ package com.app.dto;
 
 import lombok.*;
 
+import javax.management.relation.Role;
+
 @Getter
 @Setter
 @ToString

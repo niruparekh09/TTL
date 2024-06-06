@@ -20,7 +20,7 @@ public class EmployeeController {
     @Autowired
     private EmployeeService employeeService;
 
-    @GetMapping("/")
+    @GetMapping
     public ResponseEntity<List<EmployeeResponse>> getEmployeeList() {
         List<EmployeeResponse> list = employeeService.getEmployeeList();
         return ResponseEntity.ok(list);
@@ -32,22 +32,19 @@ public class EmployeeController {
         return ResponseEntity.ok(response);
     }
 
-    //@PreAuthorize("hasRole('ROLE_DEV')")
-    @PostMapping
+    @PostMapping("/add")
     public ResponseEntity<EmployeeResponse> addEmployee(@RequestBody @Valid EmployeeInsert emp) {
         EmployeeResponse response = employeeService.addEmployee(emp);
         return ResponseEntity.status(201).body(response); // Used 201 Created for new resource creation
     }
 
-  //  @PreAuthorize("hasRole('ROLE_DEV')")
-    @PutMapping("/{id}")
+    @PutMapping("/update/{id}")
     public ResponseEntity<EmployeeUpdateResponse> updateEmployee(@PathVariable Long id, @RequestBody @Valid EmployeeInsert emp) {
         EmployeeUpdateResponse response = employeeService.updateEmployee(id, emp);
         return ResponseEntity.ok(response);
     }
 
-    @PreAuthorize("hasRole('ROLE_ADMIN')")
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/delete/{id}")
     public ResponseEntity<EmployeeDeleteResponse> deleteEmployee(@PathVariable Long id) {
         EmployeeDeleteResponse response = employeeService.deleteEmployee(id);
         return ResponseEntity.ok(response);

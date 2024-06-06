@@ -21,6 +21,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
         Employee authenticatedEmployee = empRepo.findByEmail(email)
                 .orElseThrow(() -> new UsernameNotFoundException("Invalid Email !!!"));
         System.out.println(authenticatedEmployee.getEmail());
+        System.out.println(authenticatedEmployee.getUserRole());;
         return new CustomUserDetails(authenticatedEmployee);
     }
 }

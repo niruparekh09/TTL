@@ -10,6 +10,7 @@ import com.app.model.UserRole;
 import com.app.repository.EmployeeRepository;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
@@ -25,6 +26,9 @@ public class EmployeeServiceImpl implements EmployeeService {
 
     @Autowired
     private ModelMapper modelMapper;
+
+    @Autowired
+    private PasswordEncoder encoder;
 
     @Override
     public EmployeeResponse getEmployee(Long id) {
@@ -46,7 +50,8 @@ public class EmployeeServiceImpl implements EmployeeService {
     public EmployeeResponse addEmployee(EmployeeInsert emp) {
         Employee employee = modelMapper.map(emp, Employee.class);
         // Manually set the Role
-        employee.setUserRole(UserRole.valueOf(emp.getRole().toUpperCase()));
+        employee.setUserRole(UserRole.valueOf(emp.getRole()));
+        employee.setPassword(encoder.encode(emp.getPassword()));
         employee = employeeRepository.save(employee);
         return modelMapper.map(employee, EmployeeResponse.class);
     }
@@ -61,7 +66,7 @@ public class EmployeeServiceImpl implements EmployeeService {
         existingEmployee.setCity(emp.getCity());
         existingEmployee.setSalary(emp.getSalary());
         existingEmployee.setEmail(emp.getEmail());
-        existingEmployee.setPassword(emp.getPassword());
+        existingEmployee.setPassword(encoder.encode(emp.getPassword()));
         existingEmployee.setDept(emp.getDept());
 
         return new EmployeeUpdateResponse("Data updated for " + id);
