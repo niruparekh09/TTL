@@ -17,7 +17,7 @@ import java.util.stream.Collectors;
 public class GlobalExceptionHandler {
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public ResponseEntity<?> handleMethodArgumentNotValidException
-    (MethodArgumentNotValidException e) {
+            (MethodArgumentNotValidException e) {
         System.out.println("in meth arg invalid " + e);
         List<FieldError> errList = e.getFieldErrors();
         Map<String, String> map = errList.stream().collect(Collectors.toMap(FieldError::getField, FieldError::getDefaultMessage));
@@ -26,14 +26,14 @@ public class GlobalExceptionHandler {
 
     @ExceptionHandler(ResourceNotFoundException.class)
     public ResponseEntity<?> handleMotoGPException
-    (ResourceNotFoundException e) {
+            (ResourceNotFoundException e) {
         System.out.println("in res not found exc");
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(new APIResponse(e.getMessage()));
     }
 
     @ExceptionHandler(Exception.class)
     public ResponseEntity<?> handleException
-    (Exception e) {
+            (Exception e) {
         System.out.println("in catch-all  exc");
         e.printStackTrace();
         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(new APIResponse(e.getMessage()));

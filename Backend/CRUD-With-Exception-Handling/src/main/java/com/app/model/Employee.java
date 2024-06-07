@@ -40,5 +40,4 @@ public class Employee {
     @NotBlank(message = "Enter Department")
     @Column(name = "Dept", nullable = false, length = 20)
     private String dept;
-
 }
